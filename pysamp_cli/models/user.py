@@ -1,6 +1,5 @@
-from pysamp_cli import __python_version__, __python_versions__
+from pysamp_cli import __python_version__, __python_versions__, __user_config__
 from .config import BaseConfig
-from pathlib import Path
 
 
 class UserConfig(BaseConfig):
@@ -8,8 +7,8 @@ class UserConfig(BaseConfig):
     pysamp: str
     server: str
 
-    def __init__(self, *, python: str, pysamp: str, server: str, path: Path):
-        super().__init__(path=path)
+    def __init__(self, *, python: str, pysamp: str, server: str):
+        super().__init__(path=__user_config__)
         self.python = python
         self.pysamp = pysamp
         self.server = server
