@@ -60,5 +60,5 @@ class ReleaseConfig(BaseConfig):
             source: SourceFile,
     ):
         super().__init__(path=path)
-        self.release = str(release)
-        self.source = str(source)
+        self.release = str(release.path)
+        self.source = str(source.path)
