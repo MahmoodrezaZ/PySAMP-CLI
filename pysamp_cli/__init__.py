@@ -23,8 +23,8 @@ __omp_server__ = {
     'Linux': 'https://github.com/openmultiplayer/open.mp/releases/download/v1.2.0.2670/open.mp-linux-x86.tar.gz'
 }
 __samp_server__ = {
-    'Windows': '',
-    'Linux': ''
+    'Windows': 'https://raw.githubusercontent.com/KrustyKoyle/files.sa-mp.com-Archive/master/samp037_svr_R2-2-1_win32.zip',
+    'Linux': 'https://raw.githubusercontent.com/KrustyKoyle/files.sa-mp.com-Archive/master/samp037svr_R2-2-1.tar.gz'
 }
 __python_version__ = '3.12'
 __python_versions__ = ['3.8', '3.9', '3.10', '3.11', '3.12']
