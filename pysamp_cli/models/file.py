@@ -5,6 +5,10 @@ from pathlib import Path
 from pysamp_cli import __os__
 
 
+class PathIsNotGiven(Exception):
+    pass
+
+
 class BaseFile(ABC):
     url: furl
     name: Optional[str]
@@ -15,6 +19,7 @@ class BaseFile(ABC):
             url: str,
             name: Optional[str] = None,
             extension: Optional[str] = None,
+            path: str | Path = None,
             **kwargs
     ):
         if hasattr(cls, '_allowed_extensions'):
@@ -26,10 +31,10 @@ class BaseFile(ABC):
                 extension = name.split('.')[-1]
 
             if extension in getattr(cls, '_allowed_extensions')[__os__]:
-                return super().__new__(cls, url, name, extension, **kwargs)
+                return super().__new__(cls)
 
         else:
-            return super().__new__(cls, url, name, extension, **kwargs)
+            return super().__new__(cls)
 
     def __init__(
             self,
@@ -43,6 +48,17 @@ class BaseFile(ABC):
         self.name = name
         self.extension = extension
         self.path = path
+
+    def download(self, path: str | Path = None) -> None:
+        if path:
+            pass
+
+        else:
+            if self.path:
+                pass
+
+            else:
+                raise PathIsNotGiven
 
     @property
     def name(self):
