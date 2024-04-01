@@ -3,6 +3,7 @@ from typing import Optional
 from furl import furl
 from pathlib import Path
 from pysamp_cli import __os__
+from pretty_downloader import download
 
 
 class PathIsNotGiven(Exception):
@@ -50,15 +51,12 @@ class BaseFile(ABC):
         self.path = path
 
     def download(self, path: str | Path = None) -> None:
+        path = path if path else self.path
         if path:
-            pass
+            download(self.url, path, bar_name=self.name)
 
         else:
-            if self.path:
-                pass
-
-            else:
-                raise PathIsNotGiven
+            raise PathIsNotGiven
 
     @property
     def name(self):
