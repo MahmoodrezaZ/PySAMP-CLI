@@ -34,8 +34,8 @@ class UserConfig(BaseConfig):
         if value in ['samp', 'sa-mp']:
             self._server = 'sa-mp'
 
-        elif value in ['omp', 'open.mp', 'openmp']:
-            self._server = 'openmp'
+        elif value in ['omp', 'open.mp', 'open-mp']:
+            self._server = 'open-mp'
 
         else:
-            self._server = 'openmp'
+            self._server = 'open-mp'
