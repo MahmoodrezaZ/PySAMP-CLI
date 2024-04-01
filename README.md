@@ -6,7 +6,7 @@ This project is currently WIP and may have major changes, and
 it's not for production.
 
 ## Todo
-- [ ] Defining base-model of every object that we are looking to use
+- [x] Defining base-model of every object that we are looking to use
 - [ ] Pull system to store pulled resources in users storage
 - [ ] Server initializer to make SA-MP or OMP server files and install [PySAMP](https://github.com/PySAMP/PySAMP) on them
 - [ ] App feature which will give developers the ability to create reusable apps
