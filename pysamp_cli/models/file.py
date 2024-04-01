@@ -2,12 +2,34 @@ from abc import ABC
 from typing import Optional
 from furl import furl
 from pathlib import Path
+from pysamp_cli import __os__
 
 
 class BaseFile(ABC):
     url: furl
     name: Optional[str]
     extension: Optional[str]
+
+    def __new__(
+            cls,
+            url: str,
+            name: Optional[str] = None,
+            extension: Optional[str] = None,
+            **kwargs
+    ):
+        if hasattr(cls, '_allowed_extensions'):
+            parsed_url = furl(url)
+            if not name:
+                name = parsed_url.path.segments[-1]
+
+            if not extension:
+                extension = name.split('.')[-1]
+
+            if extension in getattr(cls, '_allowed_extensions')[__os__]:
+                return super().__new__(cls, url, name, extension, **kwargs)
+
+        else:
+            return super().__new__(cls, url, name, extension, **kwargs)
 
     def __init__(
             self,

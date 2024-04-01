@@ -5,6 +5,25 @@ from pathlib import Path
 
 
 class ReleaseFile(BaseFile):
+    _allowed_extensions = {
+        'Linux': ['so'],
+        'Windows': ['dll']
+    }
+
+    def __init__(
+            self,
+            *,
+            url: str
+    ):
+        super().__init__(url=url)
+
+
+class SourceFile(BaseFile):
+    _allowed_extensions = {
+        'Linux': ['zip'],
+        'Windows': ['zip']
+    }
+
     def __init__(
             self,
             *,
@@ -14,29 +33,32 @@ class ReleaseFile(BaseFile):
 
 
 class ReleaseVersion(BaseVersion):
-    releases: list[ReleaseFile]
-    source: ReleaseFile
+    release: ReleaseFile
+    source: SourceFile
 
     def __init__(
             self,
             *,
             tag: str,
-            releases: list[ReleaseFile],
-            source: ReleaseFile
+            release: ReleaseFile,
+            source: SourceFile
     ):
         super().__init__(tag)
-        self.releases = releases
+        self.release = release
         self.source = source
 
 
 class ReleaseConfig(BaseConfig):
-    release: ReleaseFile
+    release: str
+    source: str
 
     def __init__(
             self,
             *,
             path: Path,
-            release: ReleaseFile
+            release: ReleaseFile,
+            source: SourceFile,
     ):
         super().__init__(path=path)
-        self.release = release
+        self.release = str(release)
+        self.source = str(source)
