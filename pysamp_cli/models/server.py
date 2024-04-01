@@ -6,12 +6,18 @@ from .file import BaseFile
 
 
 class ServerFile(BaseFile):
+    _allowed_extensions = {
+        'Linux': ['gz'],
+        'Windows': ['zip']
+    }
+
     def __init__(
             self,
             *,
-            url: str
+            url: str,
+            path: str | Path = None
     ):
-        super().__init__(url=url)
+        super().__init__(url=url, path=path)
 
 
 class ServerVersion(BaseVersion):
@@ -20,13 +26,13 @@ class ServerVersion(BaseVersion):
     def __init__(
             self,
             *,
-            tag: str,
-            source: ServerFile
+            tag: str
     ):
         super().__init__(tag)
-        self.source = source
 
 
 class ServerConfig(BaseConfig):
+    location: str
+
     def __init__(self, *, path: Path):
         super().__init__(path=path)
