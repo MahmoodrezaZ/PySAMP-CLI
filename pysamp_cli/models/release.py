@@ -88,3 +88,23 @@ class ReleaseConfig(BaseConfig):
         super().__init__(path=path)
         self.release = str(release.path)
         self.source = str(source.path)
+
+
+class ReleaseListConfig(BaseConfig):
+    releases: dict[str, str]
+
+    def __init__(
+            self,
+            *,
+            path: Path,
+            release_version: ReleaseVersion
+    ):
+        super().__init__(path=path)
+        self.__release_version = release_version
+        self.release_versions = {}
+        for release in self.__release_version.releases:
+            if not self.release_versions.get(self.__release_version.tag):
+                self.release_versions[self.__release_version.tag] = []
+
+            self.release_versions[self.__release_version.tag].append(release.path)
+
