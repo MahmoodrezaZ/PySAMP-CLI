@@ -58,18 +58,19 @@ class BaseConfig(ABC):
                 kwargs = {}
 
                 for key, value in json_content.items():
-                    if key in cls.__dict__:
+                    if key in cls.__annotations__:
                         kwargs[key] = value
 
                 return cls(
-                    **kwargs
+                    **kwargs,
+                    path=path
                 )
 
         except json.JSONDecodeError:
             raise WrongConfiguration(path)
 
         except FileNotFoundError:
-            return ConfigurationNotFound(path)
+            raise ConfigurationNotFound(path)
 
 
 class ConfigBaseException(json.JSONDecodeError):
@@ -82,13 +83,17 @@ class ConfigBaseException(json.JSONDecodeError):
 
 class WrongConfiguration(ConfigBaseException):
     def __init__(
-            self
+            self,
+            path
     ):
+        super().__init__(path)
         self.msg = f'Wrong configuration file at {self.path}'
 
 
 class ConfigurationNotFound(ConfigBaseException):
     def __init__(
-            self
+            self,
+            path
     ):
+        super().__init__(path)
         self.msg = f'Configuration file does not exists at {self.path}'
