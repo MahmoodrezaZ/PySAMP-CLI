@@ -7,11 +7,17 @@ __app_name__ = 'pysamp_cli'
 __version__ = '0.1.0'
 __base_repository__ = f'https://github.com/{__package__}'
 
-# Package Storage
+# User Storage
 __user_storage__ = Path.home() / '.pysamp_cli'
-__releases__ = __user_storage__ / 'releases'
-__servers__ = __user_storage__ / 'servers'
 __user_config__ = __user_storage__ / '.config.json'
+
+# Release Storage
+__releases__ = __user_storage__ / 'releases'
+__releases_config__ = __releases__ / '.config.json'
+
+# Server Storage
+__servers__ = __user_storage__ / 'servers'
+
 
 # General Data
 __os__ = platform.system()
