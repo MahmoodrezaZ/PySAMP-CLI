@@ -7,7 +7,8 @@ it's not for production.
 
 ## Todo
 - [x] Defining base-model of every object that we are looking to use
-- [ ] Pull system to store pulled resources in users storage
+- [x] Version detection system and version manager for pulled datas
+- [ ] Pull system to store pulled datas in users storage
 - [ ] Server initializer to make SA-MP or OMP server files and install [PySAMP](https://github.com/PySAMP/PySAMP) on them
 - [ ] App feature which will give developers the ability to create reusable apps
 - [ ] Default settings for [PySAMP](https://github.com/PySAMP/PySAMP) server and app list to manage app inclusion
