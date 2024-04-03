@@ -28,7 +28,7 @@ class PySAMP:
 
     @classmethod
     def get_release(cls, tag: str) -> ReleaseVersion | None:
-        release_list = [release_version for release_version in cls.__read() if release_version.tag == tag]
+        release_version = [release_version for release_version in cls.__read() if release_version.tag == tag]
 
-        if len(release_list) > 0:
-            return release_list
+        if len(release_version) > 0:
+            return release_version[-1]
