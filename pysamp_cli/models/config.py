@@ -17,7 +17,7 @@ class BaseConfig(ABC):
     def __export(self) -> Dict[str, Any]:
         export = {}
         for key, value in self.__dict__.items():
-            if key.startswith(f'_{self.__class__.__name__}'):
+            if key.startswith(f'_{self.__class__.__name__}') or key.startswith(f'_{self.__class__.__base__.__name__}'):
                 continue
 
             elif key.startswith('_'):
