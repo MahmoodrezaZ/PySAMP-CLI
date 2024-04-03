@@ -91,15 +91,14 @@ class ReleaseConfig(BaseConfig):
 
 
 class ReleaseListConfig(BaseConfig):
-    releases: dict[str, str]
-    release_versions: dict[str, list]
+    release_versions: dict[str, dict]
 
     def __init__(
             self,
             *,
             path: Path,
             release_version: ReleaseVersion = None,
-            release_versions: dict[str, list] = None
+            release_versions: dict[str, dict] = None
     ):
         super().__init__(path=path)
         if release_versions:
@@ -107,10 +106,17 @@ class ReleaseListConfig(BaseConfig):
 
         if release_version:
             self.__release_version = release_version
-            self.release_versions = {}
-            for release in self.__release_version.releases:
-                if not self.release_versions.get(self.__release_version.tag):
-                    self.release_versions[self.__release_version.tag] = []
+            if not hasattr(self, 'release_versions'):
+                self.release_versions = {}
 
-                self.release_versions[self.__release_version.tag].append(release.path)
+            if not self.release_versions.get(self.__release_version.tag):
+                self.release_versions[self.__release_version.tag] = {
+                    'releases': [],
+                    'source': None
+                }
+
+            for release in self.__release_version.releases:
+                self.release_versions[self.__release_version.tag]['releases'].append(str(release.path))
+
+            self.release_versions[self.__release_version.tag]['source'] = str(self.__release_version.source.path)
 
