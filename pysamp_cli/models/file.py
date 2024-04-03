@@ -50,10 +50,10 @@ class BaseFile(ABC):
         self.extension = extension
         self.path = path
 
-    def download(self, path: str | Path = None) -> None:
+    def download(self, path: str | Path = None):
         path = path if path else self.path
         if path:
-            download(self.url, path, bar_name=self.name)
+            return download(self.url.url, path, bar_name=self.name)
 
         else:
             raise PathIsNotGiven
