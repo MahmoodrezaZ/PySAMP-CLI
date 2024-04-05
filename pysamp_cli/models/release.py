@@ -92,6 +92,7 @@ class ReleaseConfig(BaseConfig):
 
 class ReleaseListConfig(BaseConfig):
     release_versions: dict[str, dict]
+    # @TODO: key for export and import the json value into every config object
 
     def __init__(
             self,
@@ -120,3 +121,5 @@ class ReleaseListConfig(BaseConfig):
 
             self.release_versions[self.__release_version.tag]['source'] = str(self.__release_version.source.path)
 
+    def add_release(self):
+        pass
